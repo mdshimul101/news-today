@@ -38,6 +38,13 @@ const displayNews = (data, length) => {
     //console.log(name);
     const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = '';
+    const foundNews = document.getElementById('found-news');
+    foundNews.innerHTML = '';
+    const foundNewsDiv = document.createElement('div');
+    foundNewsDiv.innerHTML = `
+      <h5 class="ms-2">${length ? length : 'No'} News found </h5>
+      `;
+    foundNews.appendChild(foundNewsDiv);
     for (const news of data) {
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('col');
