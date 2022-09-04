@@ -25,4 +25,43 @@ const setCategoryName = (categorys) => {
 
 }
 
+const loadNews = (category_id) => {
+
+    const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayNews(data.data, data.data.length))
+        .catch(error => console.log(error))
+
+}
+const displayNews = (data, length) => {
+    //console.log(name);
+    const newsContainer = document.getElementById('news-container');
+    newsContainer.innerHTML = '';
+    for (const news of data) {
+        const newsDiv = document.createElement('div');
+        newsDiv.classList.add('col');
+        newsDiv.innerHTML = `
+     <div class="card">
+     <img src="${news.thumbnail_url}" class="card-img-top" alt="...">
+     <div class="card-body">
+     <h5 class="card-title">${news.title}</h5>
+     <p class="card-text">${news.details.slice(0, 200)}...</div>
+     <div class="d-flex align-items-center justify-content-between">
+     <img src="${news.author.img}" class="rounded-circle p-3 w-25">
+     <div class="text-center">
+     <p class="p-0 m-0">${news.author.name ? news.author.name : 'No author name'}</p>
+     <span>${news.author.published_date ? news.author.published_date : 'No Publish Date'}</span>
+     </div>
+     <p class="ms-4"><i class="fa-solid fa-eye me-2"></i>${news.total_view ? news.total_view : 'No View'}</p>
+     <button onclick="detailNews('${news._id}')" type="button" class="mx-auto"  data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-sharp fa-solid fa-arrow-right"></i></button>
+    </div>
+   `;
+        newsContainer.appendChild(newsDiv);
+    }
+
+
+}
+
+
 loadCategories();
