@@ -26,7 +26,7 @@ const setCategoryName = (categorys) => {
 }
 
 const loadNews = (category_id) => {
-
+    togglespinner(true);
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`
     fetch(url)
         .then(res => res.json())
@@ -66,7 +66,18 @@ const displayNews = (data, length) => {
    `;
         newsContainer.appendChild(newsDiv);
     }
+    togglespinner(false);
 
+}
+
+const togglespinner = isLoading => {
+    const loaderSection = document.getElementById('spinner');
+    if (isLoading) {
+        loaderSection.classList.remove('d-none');
+    }
+    else {
+        loaderSection.classList.add('d-none');
+    }
 
 }
 
