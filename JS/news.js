@@ -45,6 +45,7 @@ const displayNews = (data, length) => {
       <h5 class="ms-2">${length ? length : 'No'} News found </h5>
       `;
     foundNews.appendChild(foundNewsDiv);
+    const totalView = data.sort((view1, view2) => view2.total_view - view1.total_view);
     for (const news of data) {
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('col');
