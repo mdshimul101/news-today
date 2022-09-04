@@ -81,5 +81,31 @@ const togglespinner = isLoading => {
 
 }
 
+const detailNews = (news) => {
+    //console.log(news);
+    const url = `https://openapi.programming-hero.com/api/news/${news}`
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayNewsDetails(data.data[0]))
+
+}
+
+
+const displayNewsDetails = (data) => {
+    console.log(data);
+    const modelTitle = document.getElementById('newsDetailsLabel');
+    modelTitle.innerText = data.title;
+    const newsDetails = document.getElementById('news-details');
+    newsDetails.innerHTML = `
+  <img src = "${data.image_url}" class="w-75">
+     <p>${data.details}</p>
+     <h4 class="text-muted">Author Name : ${data.author.name ? data.author.name : 'No author'}</h4>
+     <p class="text-muted">Release Date : ${data.author.published_date ? data.author.published_date : 'No Publish Date'}</p>
+     <p class="text-muted">Views : ${data.total_view ? data.total_view : 'No View'}M</p>
+  `
+
+}
+
+
 
 loadCategories();
