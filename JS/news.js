@@ -3,8 +3,6 @@ const loadCategories = async () => {
     const res = await fetch(url);
     const data = await res.json();
     setCategoryName(data.data.news_category);
-
-
 }
 const setCategoryName = (categorys) => {
     //console.log(categorys);
@@ -106,7 +104,5 @@ const displayNewsDetails = (data) => {
   `
 
 }
-
-
 
 loadCategories();
